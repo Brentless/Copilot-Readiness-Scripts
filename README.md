@@ -9,6 +9,7 @@ Graph (Application Permissions)
 - Groups.ReadWrite.All
 - Directory.Read.All
 - Files.Read.All
+
 SharePoint (Application Permission)
 - Sites.FullControl.All
 
