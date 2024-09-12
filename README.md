@@ -1,5 +1,5 @@
 # Copilot-Readiness-Scripts
-This is a collection of useful PowerShell scripts that can support data readiness exploration in Copilot for Microsoft 365.  There are certainly other products and solutions to gather some of this information, but these are quick and easy scripts to manually pull the data out so you can do some analysis yourself.  Sharing here so others might be able to take advantage of these.
+This is a collection of useful PowerShell scripts that can support data readiness exploration in Copilot for Microsoft 365.  These scripts will look across SharePoint, Teams, and M365 Groups.  There are certainly other products and solutions to gather some of this information, but these are quick and easy scripts to manually pull the data out so you can do some analysis yourself.  Sharing here so others might be able to take advantage of these.
 
 **Pre-reqs**
 Need an Entra ID App Registration with SharePoint-admin level rights
