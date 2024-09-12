@@ -1,5 +1,5 @@
 # Copilot-Readiness-Scripts
-This is a collection of useful PowerShell scripts that can support data readiness exploration in Copilot for Microsoft 365.  Sharing here so others might be able to take advantage of these.
+This is a collection of useful PowerShell scripts that can support data readiness exploration in Copilot for Microsoft 365.  There are certainly other products and solutions to gather some of this information, but these are quick and easy scripts to manually pull the data out so you can do some analysis yourself.  Sharing here so others might be able to take advantage of these.
 
 **Pre-reqs**
 Need an Entra ID App Registration with SharePoint-admin level rights
@@ -46,6 +46,8 @@ CUSTOM OPTIONS: There is an option to run this on just a particular SharePoint s
 
 [copilot_sharePoint_getPrivateM365Groups.ps1](copilot_sharePoint_getPrivateM365Groups.ps1)
 
-This script will pull a list of Teams and M365 Groups that have been marked as "PUBLIC" for visibility.  Teams marked as Public will make content available for all users in the organization, and thus accessible for processing by Copilot.  Some Teams and Groups are ok to be marked as Public, but admins should review that those are approved for purpose.
+This script will pull a list of Teams and M365 Groups that have been marked as "PUBLIC" for visibility.  Teams marked as Public will make content available for all users in the organization, and thus accessible for processing by Copilot.  Some Teams and Groups are ok to be marked as Public, but admins should review that those are approved for purpose.  This is a subset of data that can be pulled from the bigger Site and Team Inventory export.
+
+This could be modified to also automatically set Public teams to Private when they are found.
 
 ![image](https://github.com/user-attachments/assets/6f937bd9-fd3f-47a2-90ff-d47986128fc7)
