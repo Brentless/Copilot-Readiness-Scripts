@@ -118,7 +118,7 @@ Connect-PnPOnline -Url $AdminSiteURL -Tenant ("$($tenant).onmicrosoft.com") -Cli
 
 $sites = Get-PnPTenantSite
 
-$permissionsExport = @()
+$Global:permissionsExport = @()
 
 foreach($site in $sites){
 
@@ -136,7 +136,7 @@ foreach($site in $sites){
     }
 }
 
-$permissionsExport | Sort-Object Path | Select-Object * | export-csv $exportLocation -Encoding UTF8 -NoTypeInformation 
+$Global:permissionsExport | Sort-Object Path | Select-Object * | export-csv $exportLocation -Encoding UTF8 -NoTypeInformation 
 Write-Host "Export Complete" -ForegroundColor Cyan
 
 
