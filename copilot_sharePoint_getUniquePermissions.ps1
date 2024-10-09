@@ -27,7 +27,7 @@ $thumbprint = "YourCertThumbprintHere" # From self signed certificate
 $timestamp = Get-Date -Format FileDateTime
 $exportLocation = "C:\temp\permission_export_$($timestamp).csv"
 
-$includeonlyBrokenPermissions = $false # set to true to only export items that have broken permissions, otherwise will get a full report of all content
+$Global:includeonlyBrokenPermissions = $false # set to true to only export items that have broken permissions, otherwise will get a full report of all content
 
 # ======================================================= #
 # Get files and check broken permissions
