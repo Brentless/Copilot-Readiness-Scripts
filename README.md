@@ -51,3 +51,12 @@ This script will pull a list of Teams and M365 Groups that have been marked as "
 This could be modified to also automatically set Public teams to Private when they are found.
 
 ![image](https://github.com/user-attachments/assets/6f937bd9-fd3f-47a2-90ff-d47986128fc7)
+
+
+**Creating a Self Signed Certificate**
+
+[copilot_entra_createSelfSignedCertificate.ps1](copilot_entra_createSelfSignedCertificate.ps1)
+
+If you need a quick script to create a self signed certificate that can be used with some of the PowerShell scripts above, here is a quick one for reference.
+
+[https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-self-signed-certificate](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-self-signed-certificate)
