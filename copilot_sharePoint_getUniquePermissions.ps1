@@ -102,10 +102,10 @@ $libraryName = "Shared Documents"
 Connect-PnPOnline -Url $targetURL -Tenant ("$($tenant).onmicrosoft.com") -ClientId $appId -Thumbprint $thumbprint
 $context = Get-PnPContext
 
-$permissionsExport = @()
+$Global:permissionsExport = @()
 Iterate-FilePermissions -library $libraryName
 Write-Host "Exporting to CSV..." -ForegroundColor Cyan
-$permissionsExport | Sort-Object Path | Select-Object * | export-csv $exportLocation -Encoding UTF8 -NoTypeInformation 
+$Global:permissionsExport | Sort-Object Path | Select-Object * | export-csv $exportLocation -Encoding UTF8 -NoTypeInformation 
 Write-Host "Export Complete" -ForegroundColor Cyan
 #>
 
