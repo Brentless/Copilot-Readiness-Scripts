@@ -44,9 +44,9 @@ CUSTOM OPTIONS: There is an option to run this on just a particular SharePoint s
 
 **Public Teams and M365 Groups**
 
-[copilot_sharePoint_getPrivateM365Groups.ps1](copilot_sharePoint_getPrivateM365Groups.ps1)
+[copilot_sharePoint_getM365Groups.ps1](copilot_sharePoint_getM365Groups.ps1)
 
-This script will pull a list of Teams and M365 Groups that have been marked as "PUBLIC" for visibility.  Teams marked as Public will make content available for all users in the organization, and thus accessible for processing by Copilot.  Some Teams and Groups are ok to be marked as Public, but admins should review that those are approved for purpose.  This is a subset of data that can be pulled from the bigger Site and Team Inventory export.
+This script will pull a list of Teams and M365 Groups that have been marked as "PUBLIC" for visibility.  Teams marked as Public will make content available for all users in the organization, and thus accessible for processing by Copilot.  Some Teams and Groups are ok to be marked as Public, but admins should review that those are approved for purpose.  This is a subset of data that can be pulled from the bigger Site and Team Inventory export.  Recently updated to include the Team/Group owners and pull the email addresses out into a seperate file if you needed to do mass communication to only Team/Group owners.
 
 This could be modified to also automatically set Public teams to Private when they are found.
 
