@@ -1,7 +1,24 @@
 # Copilot-Readiness-Scripts
 This is a collection of useful PowerShell scripts that can support data readiness exploration in Copilot for Microsoft 365.  These scripts will look across SharePoint, Teams, and M365 Groups.  There are certainly other products and solutions to gather some of this information, but these are quick and easy scripts to manually pull the data out so you can do some analysis yourself.  Sharing here so others might be able to take advantage of these.
 
-**Pre-reqs**
+
+**Teams App Permission Policies (GCC)**
+
+[copilot_teams_setAppPermissionPolicy.ps1](copilot_teams_setAppPermissionPolicy.ps1)
+
+This script will enable you to bulk apply a custom Teams App Permission Policy to one (or multiple) Entra Security Groups.  It will pull the membership of the groups, then iterate through users, and change them from the Global policy to a custom Teams App Permission Policy called "Allow Copilot".  In this scenario, the Global Policy is set to BLOCK COPILOT, while the custom Policy will ALLOW COPILOT.
+
+This is important for limiting access to the "free" version of Copilot Chat for all licensed users.
+
+When you have completed your pilot and are ready to enable Copilot Chat for all users, you can update the Global policy and re-enable the Copilot App for all users.
+
+This script requires AzureAD and MicrosoftTeams PowerShell Modules.  You must run this script as either a Global Administrator or a Teams Administrator.
+
+![image](https://github.com/user-attachments/assets/4acfc90e-c800-4de4-82fa-a0bc2fb93fdb)
+
+
+**Pre-reqs for Graph API-Based Scripts Below**
+
 Need an Entra ID App Registration with SharePoint-admin level rights
 
 Graph (Application Permissions)
