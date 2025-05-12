@@ -4,22 +4,12 @@
  for a particular purpose. 
 #>
 
-# This script is primarily built for GCC customers who need to manage Teams App Permissions in bulk for
-# licensed M365 Copilot users as well as Copilot Chat Pilot Users.  Group-based license assignment is 
-# not currently available in GCC.  Authorized user groups should also be enabled for Copilot in the 
-# M365 Apps > Integrated Apps > Copilot app.
-
-# Ideally this is temporary if you need to block access to the Copilot App in teams while piloting, with
-# the goal of fully enabling the Copilot App in the Global policy so you do not have to manage this policy
-
-# Recommend running this script in Windows PowerShell ISE, script may not run using PowerShell Core (e.g. in VS Code)
-# This script requires both AzureAD and MicrosoftTeams modules
-# Need either Global Admin Permission OR Need Teams Admin Permissions
+# Need either Global Admin Permission
+# OR Need Teams Admin Permissions
 
 # ---------------------------------------------
 
-# Define the group IDs in an array (ensure these are valid GUIDs) - add as many as needed
-# In this example I have a group for my Licensed users and another ones who are piloting Copilot Chat
+# Define the group IDs in an array (ensure these are valid GUIDs)
 
 $groupIds = @(
     "3a4ef3e6-be5c-4644-b101-e2ac53b13e90", # Copilot - Licensed Users
@@ -31,9 +21,9 @@ $groupIds = @(
 # Check for AzureAD and MicrosoftTeams Modules
 # Install Required Modules if not found (run as admin may be required)
 
-if ($null -eq (Get-Module -ListAvailable -Name AzureAD)) {
-    Write-Host "Installing Azure AD module" -ForegroundColor Cyan
-    Install-Module AzureAD -Repository PSGallery -AllowClobber -Force
+if ($null -eq (Get-Module -ListAvailable -Name Microsoft.Graph)) {
+    Write-Host "Installing Graph module" -ForegroundColor Cyan
+    Install-Module -Name Microsoft.Graph -Force -AllowClobber -Scope CurrentUser
 }
 
 if ($null -eq (Get-Module -ListAvailable -Name MicrosoftTeams)) {
@@ -44,12 +34,10 @@ if ($null -eq (Get-Module -ListAvailable -Name MicrosoftTeams)) {
 # ---------------------------------------------
 
 # Connect to required services (login with MFA as needed)
-
-Connect-AzureAD
+Connect-MgGraph -Scopes "Group.Read.All", "User.Read.All"
 Connect-MicrosoftTeams
 
 # ---------------------------------------------
-
 # Create an array of all of the users who will have their Teams App Permission policy changed
 
 $allUsers = @()
@@ -58,8 +46,10 @@ $allUsers = @()
 foreach ($groupId in $groupIds) {
     Write-Host "Getting membership of group $($groupId)" -ForegroundColor Cyan
     try {
-        $members = Get-AzureADGroupMember -ObjectId $groupId -All $true
-        $allUsers += $members
+        $members = Get-MgGroupMember -GroupId $groupId -All | Select -ExpandProperty AdditionalProperties
+        foreach($member in $members){
+            $allUsers += $member.userPrincipalName
+        }
     } catch {
         $errorMessage = $_.Exception.Message
         Write-Warning "Failed to get members for group ID ${groupId}: ${errorMessage}"
@@ -68,7 +58,7 @@ foreach ($groupId in $groupIds) {
 
 # Remove duplicates
 Write-Host "`nRemoving duplicates from array" -ForegroundColor Cyan
-$uniqueUsers = $allUsers | Sort-Object ObjectId -Unique
+$uniqueUsers = $allUsers | Get-Unique
 
 # Display the users who will be reviewed
 Write-Host "`nUser accounts ($($uniqueUsers.Count)):" -ForegroundColor Cyan
@@ -114,3 +104,5 @@ foreach ($user in $uniqueUsers) {
 }
 
 #>
+
+
